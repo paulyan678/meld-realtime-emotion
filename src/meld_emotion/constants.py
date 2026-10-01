@@ -1,0 +1,9 @@
+LABELS = ["neutral", "surprise", "fear", "sadness", "joy", "disgust", "anger"]
+TEXT_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+TEXT_REVISION = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+AUDIO_MODEL = "facebook/wav2vec2-base-960h"
+AUDIO_REVISION = "22aad52d435eb6dbaf354bdad9b0da84ce7d6156"
+SAMPLE_RATE = 16000
+MAX_AUDIO_SECONDS = 30
+TEXT_MAX_TOKENS = 128
+AUDIO_CHUNK_SECONDS = 6
