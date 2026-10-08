@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speech emotion demo</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Speech emotion demo</h1>
+    <p>Record up to 30 seconds in English, then stop to get a transcript and emotion result.</p>
+
+    <div class="actions">
+      <button id="record" type="button">Record microphone</button>
+      <button id="stop" type="button" hidden>Stop &amp; analyze</button>
+      <span id="record-clock" aria-label="Recording duration">00:00</span>
+    </div>
+    <div id="upload-zone" class="upload">
+      <label for="audio-file">Or upload a WAV file:</label>
+      <input id="audio-file" type="file" accept=".wav,audio/wav,audio/x-wav">
+    </div>
+    <p id="audio-info" class="note">WAV files up to 8 MiB.</p>
+    <p id="message" role="status" aria-live="polite">Ready to record.</p>
+
+    <section aria-labelledby="transcript-title">
+      <h2 id="transcript-title"><label for="transcript">Transcript</label></h2>
+      <fieldset>
+        <legend class="visually-hidden">Transcript source</legend>
+        <label><input type="radio" name="transcript-mode" id="mode-auto" value="automatic" checked> Automatic</label>
+        <label><input type="radio" name="transcript-mode" id="mode-manual" value="provided"> Use my text</label>
+      </fieldset>
+      <p id="transcript-note" class="note">Generated after recording.</p>
+      <textarea id="transcript" maxlength="4000" rows="3" placeholder="Your spoken words will appear here." aria-describedby="transcript-helper" readonly></textarea>
+      <p id="transcript-helper" class="note">You can correct the transcript afterward.</p>
+      <div class="actions">
+        <button id="edit-transcript" type="button" hidden>Edit transcript</button>
+        <button id="analyze" type="button" disabled>Analyze audio</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="result-title">
+      <h2 id="result-title">Result</h2>
+      <p id="result-state" class="note">Awaiting input</p>
+      <div id="empty-result"></div>
+      <div id="result" hidden>
+        <p><strong id="emotion"></strong> <span id="confidence"></span> confidence</p>
+        <p id="response"></p>
+      </div>
+    </section>
+
+    <details>
+      <summary>Details</summary>
+      <p id="connection"><span id="connection-label">Checking server</span></p>
+      <div id="scores" aria-label="Emotion probabilities"></div>
+      <p>Total: <span id="latency">—</span> · Transcription: <span id="transcription-latency">—</span></p>
+      <p>Input: <span id="modalities">Text + audio</span></p>
+      <p class="note">Processing times exclude recording. Emotion labels are model estimates.</p>
+      <button id="clear-log" type="button">Clear log</button>
+      <ol id="event-log" aria-label="Session activity log"></ol>
+    </details>
+  </main>
+</body>
+</html>
