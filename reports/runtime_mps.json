@@ -1,0 +1,733 @@
+{
+  "device": "mps",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python": "3.12.13",
+  "physical_memory_bytes": 51539607552,
+  "cpu_logical_cores": 16,
+  "torch_threads": 4,
+  "network_socket_connections": "blocked",
+  "feature_cache": false,
+  "encoder_load_ms": 1681.9638339802623,
+  "cold_first_prediction_ms": 96.92483302205801,
+  "samples": 100,
+  "warm_p50_ms": 24.24737496767193,
+  "source_rows": 1109,
+  "eligible_rows": 1106,
+  "excluded_rows": 3,
+  "sample_split": "dev",
+  "warm_p95_ms": 301.1086767248342,
+  "warm_max_ms": 842.7952909842134,
+  "peak_process_rss_bytes_sampled_10ms": 1093369856,
+  "parameter_counts": {
+    "text_encoder": 22713216,
+    "audio_encoder": 94370944,
+    "heads_normalization_calibration": 34585,
+    "response_policy": 0,
+    "total": 117118745
+  },
+  "timing_boundary": "in-memory transcript and decoded audio to final tags and response; excludes recording, disk decode, transport",
+  "traces": [
+    {
+      "id": "dev/dia0_utt0",
+      "duration_seconds": 2.7946875,
+      "wall_ms": 13.074791990220547,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia1_utt9",
+      "duration_seconds": 2.176,
+      "wall_ms": 842.7952909842134,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia2_utt4",
+      "duration_seconds": 1.2373125,
+      "wall_ms": 523.3483749907464,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia4_utt6",
+      "duration_seconds": 19.8186875,
+      "wall_ms": 79.36358300503343,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia5_utt2",
+      "duration_seconds": 3.52,
+      "wall_ms": 158.32066698931158,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia6_utt0",
+      "duration_seconds": 4.352,
+      "wall_ms": 22.519999998621643,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia7_utt1",
+      "duration_seconds": 2.8373125,
+      "wall_ms": 24.917749920859933,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia8_utt2",
+      "duration_seconds": 1.472,
+      "wall_ms": 154.7251669690013,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia8_utt13",
+      "duration_seconds": 3.5626875,
+      "wall_ms": 27.229875093325973,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia10_utt1",
+      "duration_seconds": 3.3493125,
+      "wall_ms": 25.43658297508955,
+      "emotion": "fear",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia11_utt2",
+      "duration_seconds": 0.1493125,
+      "wall_ms": 146.35812502820045,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia12_utt0",
+      "duration_seconds": 1.664,
+      "wall_ms": 145.14224999584258,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia13_utt6",
+      "duration_seconds": 3.52,
+      "wall_ms": 15.542667009867728,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia13_utt18",
+      "duration_seconds": 2.432,
+      "wall_ms": 24.066666956059635,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia14_utt7",
+      "duration_seconds": 0.6826875,
+      "wall_ms": 22.384125040844083,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia15_utt9",
+      "duration_seconds": 0.7466875,
+      "wall_ms": 143.8433330040425,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia16_utt10",
+      "duration_seconds": 1.9626875,
+      "wall_ms": 366.0120830172673,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia17_utt2",
+      "duration_seconds": 1.4506875,
+      "wall_ms": 22.217624937184155,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia18_utt8",
+      "duration_seconds": 3.008,
+      "wall_ms": 24.116249987855554,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia19_utt6",
+      "duration_seconds": 1.2586875,
+      "wall_ms": 21.622124942950904,
+      "emotion": "fear",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia19_utt17",
+      "duration_seconds": 1.6,
+      "wall_ms": 380.76145795639604,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia20_utt5",
+      "duration_seconds": 0.512,
+      "wall_ms": 369.93904097471386,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia22_utt1",
+      "duration_seconds": 0.3413125,
+      "wall_ms": 17.39462499972433,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia22_utt12",
+      "duration_seconds": 2.8373125,
+      "wall_ms": 12.942875036969781,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia23_utt9",
+      "duration_seconds": 1.8133125,
+      "wall_ms": 23.649125010706484,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia24_utt7",
+      "duration_seconds": 1.536,
+      "wall_ms": 24.19987495522946,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia26_utt3",
+      "duration_seconds": 3.712,
+      "wall_ms": 26.225540903396904,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia26_utt14",
+      "duration_seconds": 2.432,
+      "wall_ms": 14.028916950337589,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia27_utt8",
+      "duration_seconds": 2.88,
+      "wall_ms": 26.861125021241605,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia28_utt9",
+      "duration_seconds": 0.768,
+      "wall_ms": 17.774708103388548,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia29_utt9",
+      "duration_seconds": 6.5493125,
+      "wall_ms": 37.16987499501556,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia30_utt10",
+      "duration_seconds": 1.7706875,
+      "wall_ms": 23.677250021137297,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia31_utt2",
+      "duration_seconds": 11.392,
+      "wall_ms": 45.74170790147036,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia32_utt0",
+      "duration_seconds": 1.4933125,
+      "wall_ms": 17.134124995209277,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia32_utt11",
+      "duration_seconds": 2.112,
+      "wall_ms": 150.06775001529604,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia34_utt6",
+      "duration_seconds": 2.752,
+      "wall_ms": 26.616042014211416,
+      "emotion": "fear",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia36_utt5",
+      "duration_seconds": 1.8346875,
+      "wall_ms": 23.3302500564605,
+      "emotion": "fear",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia37_utt4",
+      "duration_seconds": 1.5786875,
+      "wall_ms": 297.69270797260106,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia40_utt1",
+      "duration_seconds": 7.9786875,
+      "wall_ms": 37.947457982227206,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia41_utt1",
+      "duration_seconds": 1.5146875,
+      "wall_ms": 23.232624982483685,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia44_utt2",
+      "duration_seconds": 5.888,
+      "wall_ms": 26.092084008269012,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia45_utt1",
+      "duration_seconds": 1.6426875,
+      "wall_ms": 22.7145419921726,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia46_utt0",
+      "duration_seconds": 1.0453125,
+      "wall_ms": 23.056583013385534,
+      "emotion": "fear",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia47_utt1",
+      "duration_seconds": 6.6346875,
+      "wall_ms": 35.576957976445556,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia48_utt2",
+      "duration_seconds": 4.2666875,
+      "wall_ms": 26.30204102024436,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia49_utt7",
+      "duration_seconds": 1.5146875,
+      "wall_ms": 12.304292060434818,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia50_utt3",
+      "duration_seconds": 2.2186875,
+      "wall_ms": 23.8087079487741,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia53_utt0",
+      "duration_seconds": 6.8906875,
+      "wall_ms": 35.539250005967915,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia54_utt2",
+      "duration_seconds": 10.1546875,
+      "wall_ms": 42.68970899283886,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia55_utt0",
+      "duration_seconds": 2.688,
+      "wall_ms": 25.968375033698976,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia56_utt11",
+      "duration_seconds": 5.184,
+      "wall_ms": 31.18041600100696,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia57_utt5",
+      "duration_seconds": 0.9386875,
+      "wall_ms": 23.69183406699449,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia58_utt3",
+      "duration_seconds": 0.7253125,
+      "wall_ms": 17.220125067979097,
+      "emotion": "fear",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia59_utt2",
+      "duration_seconds": 4.5226875,
+      "wall_ms": 27.52949995920062,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia61_utt1",
+      "duration_seconds": 1.3866875,
+      "wall_ms": 24.587124935351312,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia63_utt0",
+      "duration_seconds": 6.1866875,
+      "wall_ms": 34.56687508150935,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia63_utt12",
+      "duration_seconds": 1.792,
+      "wall_ms": 23.13099999446422,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia64_utt2",
+      "duration_seconds": 1.0026875,
+      "wall_ms": 21.876165992580354,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia65_utt8",
+      "duration_seconds": 2.1333125,
+      "wall_ms": 21.68291702400893,
+      "emotion": "fear",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia66_utt8",
+      "duration_seconds": 3.1573125,
+      "wall_ms": 22.18304097186774,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia67_utt9",
+      "duration_seconds": 6.5066875,
+      "wall_ms": 33.353500068187714,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia68_utt9",
+      "duration_seconds": 3.8826875,
+      "wall_ms": 29.547874932177365,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia69_utt9",
+      "duration_seconds": 3.8826875,
+      "wall_ms": 15.343875042162836,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia70_utt0",
+      "duration_seconds": 6.6346875,
+      "wall_ms": 24.7521250275895,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia71_utt5",
+      "duration_seconds": 2.176,
+      "wall_ms": 12.670999974943697,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia72_utt10",
+      "duration_seconds": 2.9653125,
+      "wall_ms": 26.353875058703125,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia73_utt2",
+      "duration_seconds": 4.352,
+      "wall_ms": 14.966834103688598,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia74_utt10",
+      "duration_seconds": 1.92,
+      "wall_ms": 25.253208936192095,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia76_utt0",
+      "duration_seconds": 1.5573125,
+      "wall_ms": 24.470666074194014,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia76_utt12",
+      "duration_seconds": 8.1066875,
+      "wall_ms": 36.146208993159235,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia77_utt6",
+      "duration_seconds": 2.6026875,
+      "wall_ms": 26.88949997536838,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia77_utt17",
+      "duration_seconds": 4.0533125,
+      "wall_ms": 26.764166075736284,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia78_utt8",
+      "duration_seconds": 2.7946875,
+      "wall_ms": 14.940791996195912,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia79_utt10",
+      "duration_seconds": 4.0533125,
+      "wall_ms": 15.697999973781407,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia81_utt0",
+      "duration_seconds": 1.5573125,
+      "wall_ms": 10.805000085383654,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia82_utt9",
+      "duration_seconds": 0.7893125,
+      "wall_ms": 19.14141606539488,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia83_utt1",
+      "duration_seconds": 3.3066875,
+      "wall_ms": 27.330459095537663,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia84_utt4",
+      "duration_seconds": 1.472,
+      "wall_ms": 10.871499893255532,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia85_utt7",
+      "duration_seconds": 1.1733125,
+      "wall_ms": 23.55020900722593,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia86_utt1",
+      "duration_seconds": 5.3546875,
+      "wall_ms": 28.608917025849223,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia88_utt3",
+      "duration_seconds": 1.6426875,
+      "wall_ms": 12.390249990858138,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia89_utt9",
+      "duration_seconds": 2.6453125,
+      "wall_ms": 26.321582961827517,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia91_utt2",
+      "duration_seconds": 1.2586875,
+      "wall_ms": 11.745624942705035,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia92_utt2",
+      "duration_seconds": 1.5146875,
+      "wall_ms": 11.2554170191288,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia93_utt1",
+      "duration_seconds": 5.6746875,
+      "wall_ms": 23.304915986955166,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia94_utt4",
+      "duration_seconds": 2.9226875,
+      "wall_ms": 25.587541982531548,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia95_utt3",
+      "duration_seconds": 3.7546875,
+      "wall_ms": 22.85412501078099,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia97_utt0",
+      "duration_seconds": 8.896,
+      "wall_ms": 40.5282499268651,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia97_utt11",
+      "duration_seconds": 5.9306875,
+      "wall_ms": 24.2948749801144,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia98_utt0",
+      "duration_seconds": 7.552,
+      "wall_ms": 36.32116597145796,
+      "emotion": "fear",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia99_utt7",
+      "duration_seconds": 2.7946875,
+      "wall_ms": 12.546999962069094,
+      "emotion": "fear",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia104_utt0",
+      "duration_seconds": 3.4773125,
+      "wall_ms": 25.953167001716793,
+      "emotion": "anger",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia104_utt11",
+      "duration_seconds": 1.1306875,
+      "wall_ms": 20.900208968669176,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia105_utt7",
+      "duration_seconds": 2.2186875,
+      "wall_ms": 14.055124949663877,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia107_utt0",
+      "duration_seconds": 1.5786875,
+      "wall_ms": 11.027624947018921,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia108_utt8",
+      "duration_seconds": 2.0053125,
+      "wall_ms": 19.456750014796853,
+      "emotion": "sadness",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia109_utt4",
+      "duration_seconds": 5.2693125,
+      "wall_ms": 29.18295795097947,
+      "emotion": "disgust",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia110_utt8",
+      "duration_seconds": 2.88,
+      "wall_ms": 14.498917036689818,
+      "emotion": "surprise",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia113_utt1",
+      "duration_seconds": 0.4906875,
+      "wall_ms": 19.53037502244115,
+      "emotion": "neutral",
+      "modality_status": "text_and_audio"
+    },
+    {
+      "id": "dev/dia113_utt13",
+      "duration_seconds": 1.5146875,
+      "wall_ms": 11.347958003170788,
+      "emotion": "joy",
+      "modality_status": "text_and_audio"
+    }
+  ],
+  "mps_current_allocated_bytes": 468648960,
+  "mps_driver_allocated_bytes_at_end": 1144111104
+}
