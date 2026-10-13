@@ -1,0 +1,62 @@
+{
+  "recorded_at_utc": "2026-10-13T23:51:37.136989+00:00",
+  "method": "Interactive checks in real browsers against local server and real cached models; no browser adapters or mocked inference.",
+  "source_revision": "f01a35c817a4def4f468d426025702a9f4448aa3",
+  "source_sha256": {
+    "src/meld_emotion/static/app.js": "ce9ee8f3166ac4104ef93faa6ec1c93862d3d2c253b5ba52919920b82b11d181",
+    "src/meld_emotion/static/index.html": "ef2c76397fb6b42d3a0a409316a4282eba740f9608fbea76aa754662e7b5f06e",
+    "src/meld_emotion/server.py": "7a34103055d910f9d1595ebcf769c48e5915856cde8cd4baa220c37965d55d24"
+  },
+  "server": "localhost, CPU, HF_HUB_OFFLINE=1 and TRANSFORMERS_OFFLINE=1",
+  "browsers": {
+    "Chrome": "Final upload, correction, invalid WAV, recovery, and physical microphone checks",
+    "Codex in-app browser": "Upload and transcript correction checks; microphone permission flow was not completed"
+  },
+  "input": {
+    "id": "dev/dia0_utt0",
+    "audio_sha256": "02f893b53f7ec90d0e9843d6f8562b23633772a3cee49eb0eddb622f23a89715",
+    "reference_transcript": "Oh my God, he\u2019s lost it. He\u2019s totally lost it."
+  },
+  "checks": [
+    {
+      "name": "automatic_upload",
+      "status": "passed",
+      "observed": {
+        "transcript": "I GHOT HE'S LOST THAT HE SOLLY LOST HIM",
+        "emotion": "sadness",
+        "displayed_confidence": "58%",
+        "grounded_reply_present": true
+      }
+    },
+    {
+      "name": "correct_transcript_and_reanalyze_same_audio",
+      "status": "passed",
+      "observed": {
+        "emotion": "sadness",
+        "displayed_confidence": "50%",
+        "reply_quotes_corrected_transcript": true
+      }
+    },
+    {
+      "name": "physical_microphone_capture_and_stop",
+      "status": "passed",
+      "device": "MacBook Pro Microphone (Built-in)",
+      "permission": "Allow this time",
+      "recording_seconds": 3.07,
+      "observed": "Recording timer advanced; Stop & analyze completed transcription, emotion, and reply; recording controls became usable again.",
+      "limitation": "No scripted phrase or reference transcript was used. This verifies device capture and the complete path, not transcription accuracy. Ambient audio and transcript were not saved."
+    },
+    {
+      "name": "invalid_wav_clears_previous_prediction",
+      "status": "passed",
+      "observed": "cannot decode WAV audio; Needs attention; prior emotion, confidence, and reply absent; controls usable"
+    },
+    {
+      "name": "valid_upload_after_failure",
+      "status": "passed",
+      "observed": "New valid MELD upload returned sadness; transcript correction then returned sadness at displayed 50%."
+    }
+  ],
+  "fix_verified": "Prior prediction and diagnostics are cleared on new input, reanalysis, recording, transcript edits, and errors.",
+  "scope": "Functional smoke checks on one computer. No cross-browser compatibility or speech accuracy claim."
+}
