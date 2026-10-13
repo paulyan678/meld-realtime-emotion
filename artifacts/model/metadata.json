@@ -1,0 +1,267 @@
+{
+  "format_version": 1,
+  "labels": [
+    "neutral",
+    "surprise",
+    "fear",
+    "sadness",
+    "joy",
+    "disgust",
+    "anger"
+  ],
+  "text_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "audio_revision": "22aad52d435eb6dbaf354bdad9b0da84ce7d6156",
+  "training_rows": 9989,
+  "dev_rows": 1109,
+  "seed": 42,
+  "selection": {
+    "text": {
+      "C": 0.001,
+      "class_weight": "balanced",
+      "temperature": 0.8208841875692086,
+      "trials": [
+        {
+          "C": 0.001,
+          "class_weight": null,
+          "dev_macro_f1": 0.2976979038840074,
+          "iterations": [
+            32
+          ]
+        },
+        {
+          "C": 0.01,
+          "class_weight": null,
+          "dev_macro_f1": 0.35276936970690514,
+          "iterations": [
+            38
+          ]
+        },
+        {
+          "C": 0.1,
+          "class_weight": null,
+          "dev_macro_f1": 0.36805542853404727,
+          "iterations": [
+            76
+          ]
+        },
+        {
+          "C": 1.0,
+          "class_weight": null,
+          "dev_macro_f1": 0.37152246921755355,
+          "iterations": [
+            99
+          ]
+        },
+        {
+          "C": 0.001,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.37583913943520875,
+          "iterations": [
+            21
+          ]
+        },
+        {
+          "C": 0.01,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.36544520777441786,
+          "iterations": [
+            32
+          ]
+        },
+        {
+          "C": 0.1,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.35110980497345545,
+          "iterations": [
+            61
+          ]
+        },
+        {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.350437470907447,
+          "iterations": [
+            100
+          ]
+        }
+      ],
+      "training_rows": 9989,
+      "development_rows": 1109
+    },
+    "audio": {
+      "C": 0.1,
+      "class_weight": null,
+      "temperature": 1.8947896946403195,
+      "trials": [
+        {
+          "C": 0.001,
+          "class_weight": null,
+          "dev_macro_f1": 0.1388101162092343,
+          "iterations": [
+            196
+          ]
+        },
+        {
+          "C": 0.01,
+          "class_weight": null,
+          "dev_macro_f1": 0.19794449670366782,
+          "iterations": [
+            313
+          ]
+        },
+        {
+          "C": 0.1,
+          "class_weight": null,
+          "dev_macro_f1": 0.23958849841038446,
+          "iterations": [
+            832
+          ]
+        },
+        {
+          "C": 1.0,
+          "class_weight": null,
+          "dev_macro_f1": 0.215376271118781,
+          "iterations": [
+            1800
+          ]
+        },
+        {
+          "C": 0.001,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.20607980872760276,
+          "iterations": [
+            129
+          ]
+        },
+        {
+          "C": 0.01,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.22246918115107508,
+          "iterations": [
+            305
+          ]
+        },
+        {
+          "C": 0.1,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.22648511580596947,
+          "iterations": [
+            768
+          ]
+        },
+        {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.21671048602031795,
+          "iterations": [
+            1746
+          ]
+        }
+      ],
+      "training_rows": 9987,
+      "development_rows": 1108
+    },
+    "fusion": {
+      "C": 0.001,
+      "class_weight": "balanced",
+      "temperature": 0.8645303790080953,
+      "trials": [
+        {
+          "C": 0.001,
+          "class_weight": null,
+          "dev_macro_f1": 0.31396877656924904,
+          "iterations": [
+            206
+          ]
+        },
+        {
+          "C": 0.01,
+          "class_weight": null,
+          "dev_macro_f1": 0.3537886382600181,
+          "iterations": [
+            261
+          ]
+        },
+        {
+          "C": 0.1,
+          "class_weight": null,
+          "dev_macro_f1": 0.3362680081531842,
+          "iterations": [
+            666
+          ]
+        },
+        {
+          "C": 1.0,
+          "class_weight": null,
+          "dev_macro_f1": 0.3103592886366156,
+          "iterations": [
+            1419
+          ]
+        },
+        {
+          "C": 0.001,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.3780649914287673,
+          "iterations": [
+            144
+          ]
+        },
+        {
+          "C": 0.01,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.3567162609112195,
+          "iterations": [
+            268
+          ]
+        },
+        {
+          "C": 0.1,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.31824061405770604,
+          "iterations": [
+            636
+          ]
+        },
+        {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "dev_macro_f1": 0.3077874273517793,
+          "iterations": [
+            1295
+          ]
+        }
+      ],
+      "training_rows": 9987,
+      "development_rows": 1108
+    },
+    "probability_mix": {
+      "chosen_fusion_weight": 0.5,
+      "trials": [
+        {
+          "fusion_weight": 0.0,
+          "dev_macro_f1": 0.37614375803435035
+        },
+        {
+          "fusion_weight": 0.25,
+          "dev_macro_f1": 0.3828501270722468
+        },
+        {
+          "fusion_weight": 0.5,
+          "dev_macro_f1": 0.3918407418842111
+        },
+        {
+          "fusion_weight": 0.75,
+          "dev_macro_f1": 0.38728557190809015
+        },
+        {
+          "fusion_weight": 1.0,
+          "dev_macro_f1": 0.3780649914287673
+        }
+      ],
+      "selection_rows": 1108
+    }
+  },
+  "head_and_normalization_parameters": 34585,
+  "response_policy_parameters": 0,
+  "uncertainty_threshold": 0.45
+}

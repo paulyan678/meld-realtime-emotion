@@ -1,0 +1,1262 @@
+{
+  "prepared_on": "2026-10-13",
+  "provenance": {
+    "huggingface_revision": "9abc51ee7903424ffb971297608aa6d3d0de3bfa",
+    "github_revision": "e8cedf27b5d2877e198332c957127e16eb214afe",
+    "archive": {
+      "url": "https://huggingface.co/datasets/declare-lab/MELD/resolve/9abc51ee7903424ffb971297608aa6d3d0de3bfa/MELD.Raw.tar.gz?download=true",
+      "sha256": "a56b4407d574195cbce470d86f9c9d72fcfea59b0e34502ecd4babee4a5c613e",
+      "bytes": 10878146150
+    },
+    "annotations": {
+      "test": {
+        "url": "https://raw.githubusercontent.com/declare-lab/MELD/e8cedf27b5d2877e198332c957127e16eb214afe/data/MELD/test_sent_emo.csv",
+        "sha256": "8d37103938f7067600839fe29d5a114a6cd1bcdafb75bec101e06464c5006888"
+      },
+      "train": {
+        "url": "https://raw.githubusercontent.com/declare-lab/MELD/e8cedf27b5d2877e198332c957127e16eb214afe/data/MELD/train_sent_emo.csv",
+        "sha256": "d2fa2d6529cf03cac2989efec05c9b27d8fd2f4c8fc5974c7ae88aa537fa02db"
+      },
+      "dev": {
+        "url": "https://raw.githubusercontent.com/declare-lab/MELD/e8cedf27b5d2877e198332c957127e16eb214afe/data/MELD/dev_sent_emo.csv",
+        "sha256": "2e89c6f8aa182d6f62f8c6331aece905ac7273ca4999660bfb5213e1d0370c1c"
+      }
+    },
+    "conversion": {
+      "ffmpeg_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+      "sample_rate": 16000,
+      "channels": 1,
+      "encoding": "pcm_s16le",
+      "trim": null
+    },
+    "model_audio_max_seconds": 30
+  },
+  "splits": {
+    "train": {
+      "annotation_count": 9989,
+      "audio_available": 9988,
+      "dialogues": 1038,
+      "labels": {
+        "anger": 1109,
+        "disgust": 271,
+        "fear": 268,
+        "joy": 1743,
+        "neutral": 4710,
+        "sadness": 683,
+        "surprise": 1205
+      },
+      "audio_failures": [
+        {
+          "id": "train/dia125_utt3",
+          "error": "FFmpeg: moov atom not found; invalid MP4 container"
+        }
+      ],
+      "decode_warnings": [],
+      "extra_unannotated_clips": [],
+      "duration_seconds": {
+        "total": 31383.5335,
+        "min": 0.064,
+        "max": 41.0453125
+      },
+      "manifest_sha256": "80420ee671525fe5594a1431e88a06ff7b7aa4e4202c0b4b0c5f9bb371b1e809",
+      "prepare_seconds": 52.39,
+      "audio_usable": 9987,
+      "audio_exclusions": [
+        {
+          "id": "train/dia125_utt3",
+          "reason": "missing_or_corrupt_source"
+        },
+        {
+          "id": "train/dia309_utt0",
+          "reason": "exceeds_30_second_runtime_limit"
+        }
+      ],
+      "duration_mismatches_over_one_second": [
+        {
+          "id": "train/dia338_utt3",
+          "delta_seconds": 2.511313
+        }
+      ],
+      "preferred_test_variants": []
+    },
+    "dev": {
+      "annotation_count": 1109,
+      "audio_available": 1108,
+      "dialogues": 114,
+      "labels": {
+        "anger": 153,
+        "disgust": 22,
+        "fear": 40,
+        "joy": 163,
+        "neutral": 470,
+        "sadness": 111,
+        "surprise": 150
+      },
+      "audio_failures": [
+        {
+          "id": "dev/dia110_utt7",
+          "error": "Official archive has no matching MP4"
+        }
+      ],
+      "decode_warnings": [],
+      "extra_unannotated_clips": [
+        "dia49_utt4.mp4",
+        "dia49_utt5.mp4",
+        "dia66_utt10.mp4",
+        "dia66_utt9.mp4"
+      ],
+      "duration_seconds": {
+        "total": 3459.88325,
+        "min": 0.064,
+        "max": 28.544
+      },
+      "manifest_sha256": "0baffd9e1cb4be8a7ab2018fc63d39e75dc0bf7d84f250bd567edf6e73ddd889",
+      "prepare_seconds": 5.77,
+      "audio_usable": 1108,
+      "audio_exclusions": [
+        {
+          "id": "dev/dia110_utt7",
+          "reason": "missing_or_corrupt_source"
+        }
+      ],
+      "duration_mismatches_over_one_second": [],
+      "preferred_test_variants": []
+    },
+    "test": {
+      "annotation_count": 2610,
+      "audio_available": 2610,
+      "dialogues": 280,
+      "labels": {
+        "anger": 345,
+        "disgust": 68,
+        "fear": 50,
+        "joy": 402,
+        "neutral": 1256,
+        "sadness": 208,
+        "surprise": 281
+      },
+      "audio_failures": [],
+      "decode_warnings": [],
+      "extra_unannotated_clips": [
+        "dia108_utt1.mp4",
+        "dia108_utt2.mp4",
+        "dia93_utt5.mp4",
+        "dia93_utt6.mp4",
+        "dia93_utt7.mp4",
+        "final_videos_testdia93_utt6.mp4"
+      ],
+      "preferred_test_variants": [
+        "test/dia1_utt0",
+        "test/dia1_utt6",
+        "test/dia2_utt6",
+        "test/dia2_utt9",
+        "test/dia4_utt1",
+        "test/dia5_utt1",
+        "test/dia5_utt3",
+        "test/dia8_utt2",
+        "test/dia9_utt3",
+        "test/dia11_utt1",
+        "test/dia12_utt3",
+        "test/dia12_utt11",
+        "test/dia12_utt13",
+        "test/dia14_utt0",
+        "test/dia14_utt1",
+        "test/dia14_utt2",
+        "test/dia14_utt6",
+        "test/dia15_utt3",
+        "test/dia17_utt20",
+        "test/dia22_utt0",
+        "test/dia22_utt13",
+        "test/dia22_utt15",
+        "test/dia22_utt20",
+        "test/dia24_utt0",
+        "test/dia25_utt2",
+        "test/dia25_utt3",
+        "test/dia25_utt14",
+        "test/dia27_utt0",
+        "test/dia28_utt0",
+        "test/dia28_utt3",
+        "test/dia28_utt5",
+        "test/dia28_utt8",
+        "test/dia29_utt3",
+        "test/dia29_utt6",
+        "test/dia29_utt8",
+        "test/dia32_utt2",
+        "test/dia32_utt8",
+        "test/dia33_utt7",
+        "test/dia35_utt0",
+        "test/dia41_utt3",
+        "test/dia41_utt5",
+        "test/dia41_utt9",
+        "test/dia42_utt5",
+        "test/dia44_utt0",
+        "test/dia46_utt0",
+        "test/dia46_utt2",
+        "test/dia47_utt3",
+        "test/dia47_utt8",
+        "test/dia47_utt9",
+        "test/dia48_utt3",
+        "test/dia48_utt5",
+        "test/dia49_utt0",
+        "test/dia49_utt8",
+        "test/dia49_utt9",
+        "test/dia51_utt0",
+        "test/dia52_utt3",
+        "test/dia52_utt5",
+        "test/dia54_utt5",
+        "test/dia54_utt10",
+        "test/dia56_utt3",
+        "test/dia56_utt10",
+        "test/dia58_utt0",
+        "test/dia58_utt6",
+        "test/dia58_utt11",
+        "test/dia60_utt2",
+        "test/dia63_utt0",
+        "test/dia64_utt4",
+        "test/dia65_utt4",
+        "test/dia65_utt7",
+        "test/dia66_utt3",
+        "test/dia68_utt12",
+        "test/dia69_utt1",
+        "test/dia70_utt1",
+        "test/dia70_utt3",
+        "test/dia70_utt6",
+        "test/dia70_utt12",
+        "test/dia71_utt1",
+        "test/dia71_utt4",
+        "test/dia71_utt5",
+        "test/dia71_utt6",
+        "test/dia72_utt0",
+        "test/dia72_utt1",
+        "test/dia72_utt2",
+        "test/dia72_utt3",
+        "test/dia72_utt6",
+        "test/dia72_utt7",
+        "test/dia72_utt10",
+        "test/dia72_utt12",
+        "test/dia73_utt4",
+        "test/dia76_utt3",
+        "test/dia76_utt5",
+        "test/dia78_utt4",
+        "test/dia79_utt0",
+        "test/dia80_utt0",
+        "test/dia80_utt7",
+        "test/dia83_utt2",
+        "test/dia86_utt0",
+        "test/dia88_utt2",
+        "test/dia88_utt4",
+        "test/dia88_utt8",
+        "test/dia88_utt11",
+        "test/dia93_utt4",
+        "test/dia93_utt8",
+        "test/dia93_utt9",
+        "test/dia93_utt13",
+        "test/dia95_utt1",
+        "test/dia95_utt5",
+        "test/dia95_utt10",
+        "test/dia95_utt11",
+        "test/dia95_utt14",
+        "test/dia96_utt0",
+        "test/dia96_utt5",
+        "test/dia97_utt4",
+        "test/dia97_utt8",
+        "test/dia98_utt3",
+        "test/dia98_utt6",
+        "test/dia98_utt8",
+        "test/dia100_utt1",
+        "test/dia100_utt5",
+        "test/dia100_utt6",
+        "test/dia100_utt7",
+        "test/dia100_utt10",
+        "test/dia100_utt11",
+        "test/dia100_utt16",
+        "test/dia100_utt17",
+        "test/dia101_utt0",
+        "test/dia101_utt2",
+        "test/dia102_utt7",
+        "test/dia103_utt0",
+        "test/dia104_utt1",
+        "test/dia108_utt0"
+      ],
+      "duration_seconds": {
+        "total": 8651.4763125,
+        "min": 0.128,
+        "max": 304.96
+      },
+      "manifest_sha256": "10fff988c32f77e76fe4df940ceb7a23570b568e47b0b19308d06ce9b175e7f9",
+      "prepare_seconds": 15.78,
+      "audio_usable": 2608,
+      "audio_exclusions": [
+        {
+          "id": "test/dia38_utt4",
+          "reason": "exceeds_30_second_runtime_limit"
+        },
+        {
+          "id": "test/dia220_utt0",
+          "reason": "exceeds_30_second_runtime_limit"
+        }
+      ],
+      "duration_mismatches_over_one_second": [
+        {
+          "id": "test/dia155_utt3",
+          "delta_seconds": 1.621312
+        },
+        {
+          "id": "test/dia242_utt2",
+          "delta_seconds": 1.744
+        }
+      ]
+    }
+  },
+  "test_variant_alignment": {
+    "official_prefixed_variants": 132,
+    "annotated_preferred_variants": 131,
+    "comparison": [
+      {
+        "id": "test/dia100_utt1",
+        "expected": 1.2620000000000573,
+        "original": 2.7946875,
+        "alternate": 1.24,
+        "file": "final_videos_testdia100_utt1.mp4"
+      },
+      {
+        "id": "test/dia100_utt10",
+        "expected": 0.72199999999998,
+        "original": 4.352,
+        "alternate": 0.7,
+        "file": "final_videos_testdia100_utt10.mp4"
+      },
+      {
+        "id": "test/dia100_utt11",
+        "expected": 0.8520000000000891,
+        "original": 4.352,
+        "alternate": 0.83,
+        "file": "final_videos_testdia100_utt11.mp4"
+      },
+      {
+        "id": "test/dia100_utt16",
+        "expected": 0.9619999999999891,
+        "original": 3.5626875,
+        "alternate": 0.94,
+        "file": "final_videos_testdia100_utt16.mp4"
+      },
+      {
+        "id": "test/dia100_utt17",
+        "expected": 0.29200000000003,
+        "original": 3.5626875,
+        "alternate": 0.26,
+        "file": "final_videos_testdia100_utt17.mp4"
+      },
+      {
+        "id": "test/dia100_utt5",
+        "expected": 1.6689999999999827,
+        "original": 4.224,
+        "alternate": 1.64,
+        "file": "final_videos_testdia100_utt5.mp4"
+      },
+      {
+        "id": "test/dia100_utt6",
+        "expected": 1.2520000000000664,
+        "original": 4.224,
+        "alternate": 1.23,
+        "file": "final_videos_testdia100_utt6.mp4"
+      },
+      {
+        "id": "test/dia100_utt7",
+        "expected": 1.1680000000000064,
+        "original": 4.224,
+        "alternate": 1.13,
+        "file": "final_videos_testdia100_utt7.mp4"
+      },
+      {
+        "id": "test/dia101_utt0",
+        "expected": 0.6260000000000332,
+        "original": 2.1333125,
+        "alternate": 0.59,
+        "file": "final_videos_testdia101_utt0.mp4"
+      },
+      {
+        "id": "test/dia101_utt2",
+        "expected": 1.632000000000005,
+        "original": 3.5626875,
+        "alternate": 1.61,
+        "file": "final_videos_testdia101_utt2.mp4"
+      },
+      {
+        "id": "test/dia102_utt7",
+        "expected": 3.052000000000021,
+        "original": 4.1813125,
+        "alternate": 3.03,
+        "file": "final_videos_testdia102_utt7.mp4"
+      },
+      {
+        "id": "test/dia103_utt0",
+        "expected": 1.9189999999999827,
+        "original": 2.752,
+        "alternate": 1.89,
+        "file": "final_videos_testdia103_utt0.mp4"
+      },
+      {
+        "id": "test/dia104_utt1",
+        "expected": 0.9600000000000364,
+        "original": 2.5173125,
+        "alternate": 0.92,
+        "file": "final_videos_testdia104_utt1.mp4"
+      },
+      {
+        "id": "test/dia108_utt0",
+        "expected": 2.5030000000000427,
+        "original": 2.6026875,
+        "alternate": 2.47,
+        "file": "final_videos_testdia108_utt0.mp4"
+      },
+      {
+        "id": "test/dia11_utt1",
+        "expected": 2.461999999999989,
+        "original": 4.5653125,
+        "alternate": 2.44,
+        "file": "final_videos_testdia11_utt1.mp4"
+      },
+      {
+        "id": "test/dia12_utt11",
+        "expected": 1.5920000000000982,
+        "original": 2.5173125,
+        "alternate": 1.57,
+        "file": "final_videos_testdia12_utt11.mp4"
+      },
+      {
+        "id": "test/dia12_utt13",
+        "expected": 0.5839999999999463,
+        "original": 1.92,
+        "alternate": 0.56,
+        "file": "final_videos_testdia12_utt13.mp4"
+      },
+      {
+        "id": "test/dia12_utt3",
+        "expected": 2.381999999999948,
+        "original": 4.672,
+        "alternate": 2.36,
+        "file": "final_videos_testdia12_utt3.mp4"
+      },
+      {
+        "id": "test/dia14_utt0",
+        "expected": 1.5219999999999345,
+        "original": 2.7306875,
+        "alternate": 1.5,
+        "file": "final_videos_testdia14_utt0.mp4"
+      },
+      {
+        "id": "test/dia14_utt1",
+        "expected": 0.58400000000006,
+        "original": 2.7306875,
+        "alternate": 0.55,
+        "file": "final_videos_testdia14_utt1.mp4"
+      },
+      {
+        "id": "test/dia14_utt2",
+        "expected": 0.38200000000006185,
+        "original": 2.7306875,
+        "alternate": 0.36,
+        "file": "final_videos_testdia14_utt2.mp4"
+      },
+      {
+        "id": "test/dia14_utt6",
+        "expected": 0.7119999999999891,
+        "original": 2.1333125,
+        "alternate": 0.69,
+        "file": "final_videos_testdia14_utt6.mp4"
+      },
+      {
+        "id": "test/dia15_utt3",
+        "expected": 0.5430000000000064,
+        "original": 2.432,
+        "alternate": 0.51,
+        "file": "final_videos_testdia15_utt3.mp4"
+      },
+      {
+        "id": "test/dia17_utt20",
+        "expected": 1.0219999999999345,
+        "original": 2.304,
+        "alternate": 1.0,
+        "file": "final_videos_testdia17_utt20.mp4"
+      },
+      {
+        "id": "test/dia1_utt0",
+        "expected": 1.3769999999999527,
+        "original": 2.0053125,
+        "alternate": 1.34,
+        "file": "final_videos_testdia1_utt0.mp4"
+      },
+      {
+        "id": "test/dia1_utt6",
+        "expected": 0.41800000000000637,
+        "original": 2.304,
+        "alternate": 0.38,
+        "file": "final_videos_testdia1_utt6.mp4"
+      },
+      {
+        "id": "test/dia22_utt0",
+        "expected": 0.6319999999998345,
+        "original": 3.1786875,
+        "alternate": 0.61,
+        "file": "final_videos_testdia22_utt0.mp4"
+      },
+      {
+        "id": "test/dia22_utt13",
+        "expected": 1.711999999999989,
+        "original": 2.7306875,
+        "alternate": 1.69,
+        "file": "final_videos_testdia22_utt13.mp4"
+      },
+      {
+        "id": "test/dia22_utt15",
+        "expected": 2.2940000000000964,
+        "original": 4.352,
+        "alternate": 2.26,
+        "file": "final_videos_testdia22_utt15.mp4"
+      },
+      {
+        "id": "test/dia22_utt20",
+        "expected": 1.2100000000000364,
+        "original": 3.0506875,
+        "alternate": 1.17,
+        "file": "final_videos_testdia22_utt20.mp4"
+      },
+      {
+        "id": "test/dia24_utt0",
+        "expected": 1.3819999999999482,
+        "original": 1.8773125,
+        "alternate": 1.36,
+        "file": "final_videos_testdia24_utt0.mp4"
+      },
+      {
+        "id": "test/dia25_utt14",
+        "expected": 2.920000000000016,
+        "original": 3.008,
+        "alternate": 2.89,
+        "file": "final_videos_testdia25_utt14.mp4"
+      },
+      {
+        "id": "test/dia25_utt2",
+        "expected": 1.3120000000000118,
+        "original": 1.7706875,
+        "alternate": 1.29,
+        "file": "final_videos_testdia25_utt2.mp4"
+      },
+      {
+        "id": "test/dia25_utt3",
+        "expected": 0.37599999999997635,
+        "original": 1.7706875,
+        "alternate": 0.35,
+        "file": "final_videos_testdia25_utt3.mp4"
+      },
+      {
+        "id": "test/dia27_utt0",
+        "expected": 0.33399999999994634,
+        "original": 1.0453125,
+        "alternate": 0.3,
+        "file": "final_videos_testdia27_utt0.mp4"
+      },
+      {
+        "id": "test/dia28_utt0",
+        "expected": 0.9619999999999891,
+        "original": 3.6906875,
+        "alternate": 0.94,
+        "file": "final_videos_testdia28_utt0.mp4"
+      },
+      {
+        "id": "test/dia28_utt3",
+        "expected": 2.7950000000000728,
+        "original": 4.3093125,
+        "alternate": 2.77,
+        "file": "final_videos_testdia28_utt3.mp4"
+      },
+      {
+        "id": "test/dia28_utt5",
+        "expected": 1.1270000000000664,
+        "original": 2.432,
+        "alternate": 1.1,
+        "file": "final_videos_testdia28_utt5.mp4"
+      },
+      {
+        "id": "test/dia28_utt8",
+        "expected": 0.7100000000000364,
+        "original": 1.7706875,
+        "alternate": 0.67,
+        "file": "final_videos_testdia28_utt8.mp4"
+      },
+      {
+        "id": "test/dia29_utt3",
+        "expected": 1.04300000000012,
+        "original": 2.304,
+        "alternate": 1.01,
+        "file": "final_videos_testdia29_utt3.mp4"
+      },
+      {
+        "id": "test/dia29_utt6",
+        "expected": 2.0219999999999345,
+        "original": 4.8,
+        "alternate": 2.0,
+        "file": "final_videos_testdia29_utt6.mp4"
+      },
+      {
+        "id": "test/dia29_utt8",
+        "expected": 2.0019999999999527,
+        "original": 3.7546875,
+        "alternate": 1.98,
+        "file": "final_videos_testdia29_utt8.mp4"
+      },
+      {
+        "id": "test/dia2_utt6",
+        "expected": 1.561999999999955,
+        "original": 2.3893125,
+        "alternate": 1.54,
+        "file": "final_videos_testdia2_utt6.mp4"
+      },
+      {
+        "id": "test/dia2_utt9",
+        "expected": 0.97199999999998,
+        "original": 2.0053125,
+        "alternate": 0.95,
+        "file": "final_videos_testdia2_utt9.mp4"
+      },
+      {
+        "id": "test/dia32_utt2",
+        "expected": 2.795000000000016,
+        "original": 2.9226875,
+        "alternate": 2.76,
+        "file": "final_videos_testdia32_utt2.mp4"
+      },
+      {
+        "id": "test/dia32_utt8",
+        "expected": 1.4720000000000368,
+        "original": 2.9653125,
+        "alternate": 1.45,
+        "file": "final_videos_testdia32_utt8.mp4"
+      },
+      {
+        "id": "test/dia33_utt7",
+        "expected": 3.086999999999989,
+        "original": 4.2666875,
+        "alternate": 3.05,
+        "file": "final_videos_testdia33_utt7.mp4"
+      },
+      {
+        "id": "test/dia35_utt0",
+        "expected": 1.9610000000000127,
+        "original": 2.048,
+        "alternate": 1.93,
+        "file": "final_videos_testdia35_utt0.mp4"
+      },
+      {
+        "id": "test/dia41_utt3",
+        "expected": 1.0919999999998709,
+        "original": 2.2186875,
+        "alternate": 1.07,
+        "file": "final_videos_testdia41_utt3.mp4"
+      },
+      {
+        "id": "test/dia41_utt5",
+        "expected": 1.2929999999998927,
+        "original": 2.5173125,
+        "alternate": 1.26,
+        "file": "final_videos_testdia41_utt5.mp4"
+      },
+      {
+        "id": "test/dia41_utt9",
+        "expected": 1.0620000000001255,
+        "original": 2.0053125,
+        "alternate": 1.04,
+        "file": "final_videos_testdia41_utt9.mp4"
+      },
+      {
+        "id": "test/dia42_utt5",
+        "expected": 0.5119999999999436,
+        "original": 3.648,
+        "alternate": 0.49,
+        "file": "final_videos_testdia42_utt5.mp4"
+      },
+      {
+        "id": "test/dia44_utt0",
+        "expected": 0.7929999999998927,
+        "original": 3.2213125,
+        "alternate": 0.77,
+        "file": "final_videos_testdia44_utt0.mp4"
+      },
+      {
+        "id": "test/dia46_utt0",
+        "expected": 2.5919999999999845,
+        "original": 4.8,
+        "alternate": 2.57,
+        "file": "final_videos_testdia46_utt0.mp4"
+      },
+      {
+        "id": "test/dia46_utt2",
+        "expected": 2.8519999999999754,
+        "original": 4.9706875,
+        "alternate": 2.83,
+        "file": "final_videos_testdia46_utt2.mp4"
+      },
+      {
+        "id": "test/dia47_utt3",
+        "expected": 1.3350000000000364,
+        "original": 3.264,
+        "alternate": 1.3,
+        "file": "final_videos_testdia47_utt3.mp4"
+      },
+      {
+        "id": "test/dia47_utt8",
+        "expected": 0.5009999999999764,
+        "original": 1.472,
+        "alternate": 0.46,
+        "file": "final_videos_testdia47_utt8.mp4"
+      },
+      {
+        "id": "test/dia47_utt9",
+        "expected": 0.37599999999997635,
+        "original": 1.472,
+        "alternate": 0.34,
+        "file": "final_videos_testdia47_utt9.mp4"
+      },
+      {
+        "id": "test/dia48_utt3",
+        "expected": 0.9620000000000175,
+        "original": 1.2586875,
+        "alternate": 0.94,
+        "file": "final_videos_testdia48_utt3.mp4"
+      },
+      {
+        "id": "test/dia48_utt5",
+        "expected": 2.0860000000000127,
+        "original": 2.176,
+        "alternate": 2.06,
+        "file": "final_videos_testdia48_utt5.mp4"
+      },
+      {
+        "id": "test/dia49_utt0",
+        "expected": 0.9220000000000006,
+        "original": 2.3466875,
+        "alternate": 0.9,
+        "file": "final_videos_testdia49_utt0.mp4"
+      },
+      {
+        "id": "test/dia49_utt8",
+        "expected": 0.7929999999999993,
+        "original": 4.3093125,
+        "alternate": 0.77,
+        "file": "final_videos_testdia49_utt8.mp4"
+      },
+      {
+        "id": "test/dia49_utt9",
+        "expected": 0.5519999999999996,
+        "original": 4.3093125,
+        "alternate": 0.53,
+        "file": "final_videos_testdia49_utt9.mp4"
+      },
+      {
+        "id": "test/dia4_utt1",
+        "expected": 0.5120000000000573,
+        "original": 2.0053125,
+        "alternate": 0.49,
+        "file": "final_videos_testdia4_utt1.mp4"
+      },
+      {
+        "id": "test/dia51_utt0",
+        "expected": 1.2099999999999795,
+        "original": 1.3866875,
+        "alternate": 1.18,
+        "file": "final_videos_testdia51_utt0.mp4"
+      },
+      {
+        "id": "test/dia52_utt3",
+        "expected": 1.2520000000000664,
+        "original": 3.136,
+        "alternate": 1.21,
+        "file": "final_videos_testdia52_utt3.mp4"
+      },
+      {
+        "id": "test/dia52_utt5",
+        "expected": 1.2100000000000364,
+        "original": 3.4773125,
+        "alternate": 1.17,
+        "file": "final_videos_testdia52_utt5.mp4"
+      },
+      {
+        "id": "test/dia54_utt10",
+        "expected": 1.3349999999999227,
+        "original": 3.648,
+        "alternate": 1.31,
+        "file": "final_videos_testdia54_utt10.mp4"
+      },
+      {
+        "id": "test/dia54_utt5",
+        "expected": 3.169999999999959,
+        "original": 3.264,
+        "alternate": 3.14,
+        "file": "final_videos_testdia54_utt5.mp4"
+      },
+      {
+        "id": "test/dia56_utt10",
+        "expected": 3.841999999999871,
+        "original": 4.3093125,
+        "alternate": 3.82,
+        "file": "final_videos_testdia56_utt10.mp4"
+      },
+      {
+        "id": "test/dia56_utt3",
+        "expected": 0.8920000000000528,
+        "original": 3.264,
+        "alternate": 0.87,
+        "file": "final_videos_testdia56_utt3.mp4"
+      },
+      {
+        "id": "test/dia58_utt0",
+        "expected": 0.33400000000006,
+        "original": 1.6,
+        "alternate": 0.3,
+        "file": "final_videos_testdia58_utt0.mp4"
+      },
+      {
+        "id": "test/dia58_utt11",
+        "expected": 0.87600000000009,
+        "original": 2.88,
+        "alternate": 0.85,
+        "file": "final_videos_testdia58_utt11.mp4"
+      },
+      {
+        "id": "test/dia58_utt6",
+        "expected": 0.58400000000006,
+        "original": 2.2186875,
+        "alternate": 0.55,
+        "file": "final_videos_testdia58_utt6.mp4"
+      },
+      {
+        "id": "test/dia5_utt1",
+        "expected": 0.8519999999999754,
+        "original": 2.0906875,
+        "alternate": 0.83,
+        "file": "final_videos_testdia5_utt1.mp4"
+      },
+      {
+        "id": "test/dia5_utt3",
+        "expected": 0.42200000000002547,
+        "original": 1.9626875,
+        "alternate": 0.4,
+        "file": "final_videos_testdia5_utt3.mp4"
+      },
+      {
+        "id": "test/dia60_utt2",
+        "expected": 2.7619999999999436,
+        "original": 5.312,
+        "alternate": 2.74,
+        "file": "final_videos_testdia60_utt2.mp4"
+      },
+      {
+        "id": "test/dia63_utt0",
+        "expected": 1.5919999999999845,
+        "original": 3.6053125,
+        "alternate": 1.57,
+        "file": "final_videos_testdia63_utt0.mp4"
+      },
+      {
+        "id": "test/dia64_utt4",
+        "expected": 0.6680000000000064,
+        "original": 1.792,
+        "alternate": 0.64,
+        "file": "final_videos_testdia64_utt4.mp4"
+      },
+      {
+        "id": "test/dia65_utt4",
+        "expected": 2.1420000000000528,
+        "original": 2.3466875,
+        "alternate": 2.12,
+        "file": "final_videos_testdia65_utt4.mp4"
+      },
+      {
+        "id": "test/dia65_utt7",
+        "expected": 0.8119999999998981,
+        "original": 1.92,
+        "alternate": 0.79,
+        "file": "final_videos_testdia65_utt7.mp4"
+      },
+      {
+        "id": "test/dia66_utt3",
+        "expected": 1.1320000000000618,
+        "original": 4.0746875,
+        "alternate": 1.11,
+        "file": "final_videos_testdia66_utt3.mp4"
+      },
+      {
+        "id": "test/dia68_utt12",
+        "expected": 1.2520000000000024,
+        "original": 1.7706875,
+        "alternate": 1.23,
+        "file": "final_videos_testdia68_utt12.mp4"
+      },
+      {
+        "id": "test/dia69_utt1",
+        "expected": 1.47199999999998,
+        "original": 3.0933125,
+        "alternate": 1.45,
+        "file": "final_videos_testdia69_utt1.mp4"
+      },
+      {
+        "id": "test/dia70_utt1",
+        "expected": 1.2519999999999527,
+        "original": 2.88,
+        "alternate": 1.21,
+        "file": "final_videos_testdia70_utt1.mp4"
+      },
+      {
+        "id": "test/dia70_utt12",
+        "expected": 1.5020000000000664,
+        "original": 1.6,
+        "alternate": 1.47,
+        "file": "final_videos_testdia70_utt12.mp4"
+      },
+      {
+        "id": "test/dia70_utt3",
+        "expected": 1.5020000000000664,
+        "original": 5.888,
+        "alternate": 1.46,
+        "file": "final_videos_testdia70_utt3.mp4"
+      },
+      {
+        "id": "test/dia70_utt6",
+        "expected": 1.2930000000000064,
+        "original": 2.2613125,
+        "alternate": 1.26,
+        "file": "final_videos_testdia70_utt6.mp4"
+      },
+      {
+        "id": "test/dia71_utt1",
+        "expected": 0.54300000000012,
+        "original": 2.8373125,
+        "alternate": 0.52,
+        "file": "final_videos_testdia71_utt1.mp4"
+      },
+      {
+        "id": "test/dia71_utt4",
+        "expected": 2.102000000000089,
+        "original": 4.096,
+        "alternate": 2.08,
+        "file": "final_videos_testdia71_utt4.mp4"
+      },
+      {
+        "id": "test/dia71_utt5",
+        "expected": 0.33399999999983265,
+        "original": 4.096,
+        "alternate": 0.31,
+        "file": "final_videos_testdia71_utt5.mp4"
+      },
+      {
+        "id": "test/dia71_utt6",
+        "expected": 0.7720000000001619,
+        "original": 4.096,
+        "alternate": 0.75,
+        "file": "final_videos_testdia71_utt6.mp4"
+      },
+      {
+        "id": "test/dia72_utt0",
+        "expected": 1.668999999999869,
+        "original": 3.52,
+        "alternate": 1.64,
+        "file": "final_videos_testdia72_utt0.mp4"
+      },
+      {
+        "id": "test/dia72_utt1",
+        "expected": 0.5009999999999764,
+        "original": 3.52,
+        "alternate": 0.47,
+        "file": "final_videos_testdia72_utt1.mp4"
+      },
+      {
+        "id": "test/dia72_utt10",
+        "expected": 2.043999999999869,
+        "original": 4.3093125,
+        "alternate": 2.01,
+        "file": "final_videos_testdia72_utt10.mp4"
+      },
+      {
+        "id": "test/dia72_utt12",
+        "expected": 0.7100000000000364,
+        "original": 3.84,
+        "alternate": 0.67,
+        "file": "final_videos_testdia72_utt12.mp4"
+      },
+      {
+        "id": "test/dia72_utt2",
+        "expected": 0.5219999999999345,
+        "original": 3.52,
+        "alternate": 0.5,
+        "file": "final_videos_testdia72_utt2.mp4"
+      },
+      {
+        "id": "test/dia72_utt3",
+        "expected": 0.7120000000002165,
+        "original": 3.52,
+        "alternate": 0.69,
+        "file": "final_videos_testdia72_utt3.mp4"
+      },
+      {
+        "id": "test/dia72_utt6",
+        "expected": 3.586999999999989,
+        "original": 5.3546875,
+        "alternate": 3.55,
+        "file": "final_videos_testdia72_utt6.mp4"
+      },
+      {
+        "id": "test/dia72_utt7",
+        "expected": 1.0850000000000364,
+        "original": 5.3546875,
+        "alternate": 1.06,
+        "file": "final_videos_testdia72_utt7.mp4"
+      },
+      {
+        "id": "test/dia73_utt4",
+        "expected": 0.43200000000001637,
+        "original": 1.7706875,
+        "alternate": 0.41,
+        "file": "final_videos_testdia73_utt4.mp4"
+      },
+      {
+        "id": "test/dia76_utt3",
+        "expected": 0.9180000000000064,
+        "original": 2.2613125,
+        "alternate": 0.88,
+        "file": "final_videos_testdia76_utt3.mp4"
+      },
+      {
+        "id": "test/dia76_utt5",
+        "expected": 1.8920000000000528,
+        "original": 3.5626875,
+        "alternate": 1.87,
+        "file": "final_videos_testdia76_utt5.mp4"
+      },
+      {
+        "id": "test/dia78_utt4",
+        "expected": 0.7100000000000364,
+        "original": 1.472,
+        "alternate": 0.67,
+        "file": "final_videos_testdia78_utt4.mp4"
+      },
+      {
+        "id": "test/dia79_utt0",
+        "expected": 2.5450000000000728,
+        "original": 3.136,
+        "alternate": 2.52,
+        "file": "final_videos_testdia79_utt0.mp4"
+      },
+      {
+        "id": "test/dia80_utt0",
+        "expected": 3.129000000000019,
+        "original": 3.2213125,
+        "alternate": 3.1,
+        "file": "final_videos_testdia80_utt0.mp4"
+      },
+      {
+        "id": "test/dia80_utt7",
+        "expected": 1.47199999999998,
+        "original": 2.2186875,
+        "alternate": 1.45,
+        "file": "final_videos_testdia80_utt7.mp4"
+      },
+      {
+        "id": "test/dia83_utt2",
+        "expected": 4.296000000000049,
+        "original": 4.3946875,
+        "alternate": 4.27,
+        "file": "final_videos_testdia83_utt2.mp4"
+      },
+      {
+        "id": "test/dia86_utt0",
+        "expected": 0.9220000000000255,
+        "original": 2.2613125,
+        "alternate": 0.9,
+        "file": "final_videos_testdia86_utt0.mp4"
+      },
+      {
+        "id": "test/dia88_utt11",
+        "expected": 2.4200000000000017,
+        "original": 2.688,
+        "alternate": 2.38,
+        "file": "final_videos_testdia88_utt11.mp4"
+      },
+      {
+        "id": "test/dia88_utt2",
+        "expected": 1.7520000000000007,
+        "original": 2.88,
+        "alternate": 1.73,
+        "file": "final_videos_testdia88_utt2.mp4"
+      },
+      {
+        "id": "test/dia88_utt4",
+        "expected": 1.5020000000000007,
+        "original": 6.848,
+        "alternate": 1.46,
+        "file": "final_videos_testdia88_utt4.mp4"
+      },
+      {
+        "id": "test/dia88_utt8",
+        "expected": 1.381999999999998,
+        "original": 3.264,
+        "alternate": 1.36,
+        "file": "final_videos_testdia88_utt8.mp4"
+      },
+      {
+        "id": "test/dia8_utt2",
+        "expected": 2.4319999999999027,
+        "original": 2.6453125,
+        "alternate": 2.41,
+        "file": "final_videos_testdia8_utt2.mp4"
+      },
+      {
+        "id": "test/dia93_utt13",
+        "expected": 1.2100000000000364,
+        "original": 3.9253125,
+        "alternate": 1.18,
+        "file": "final_videos_testdia93_utt13.mp4"
+      },
+      {
+        "id": "test/dia93_utt4",
+        "expected": 3.7129999999999654,
+        "original": 4.4373125,
+        "alternate": 3.69,
+        "file": "final_videos_testdia93_utt4.mp4"
+      },
+      {
+        "id": "test/dia93_utt6",
+        "expected": null,
+        "original": null,
+        "alternate": 0.65,
+        "file": "final_videos_testdia93_utt6.mp4"
+      },
+      {
+        "id": "test/dia93_utt8",
+        "expected": 1.3119999999998981,
+        "original": 2.6453125,
+        "alternate": 1.29,
+        "file": "final_videos_testdia93_utt8.mp4"
+      },
+      {
+        "id": "test/dia93_utt9",
+        "expected": 0.8350000000000364,
+        "original": 2.6453125,
+        "alternate": 0.8,
+        "file": "final_videos_testdia93_utt9.mp4"
+      },
+      {
+        "id": "test/dia95_utt1",
+        "expected": 2.836999999999989,
+        "original": 2.9653125,
+        "alternate": 2.8,
+        "file": "final_videos_testdia95_utt1.mp4"
+      },
+      {
+        "id": "test/dia95_utt10",
+        "expected": 1.9320000000000164,
+        "original": 3.0933125,
+        "alternate": 1.91,
+        "file": "final_videos_testdia95_utt10.mp4"
+      },
+      {
+        "id": "test/dia95_utt11",
+        "expected": 1.0849999999999227,
+        "original": 3.0933125,
+        "alternate": 1.06,
+        "file": "final_videos_testdia95_utt11.mp4"
+      },
+      {
+        "id": "test/dia95_utt14",
+        "expected": 0.62600000000009,
+        "original": 1.92,
+        "alternate": 0.59,
+        "file": "final_videos_testdia95_utt14.mp4"
+      },
+      {
+        "id": "test/dia95_utt5",
+        "expected": 1.5439999999999827,
+        "original": 1.6426875,
+        "alternate": 1.52,
+        "file": "final_videos_testdia95_utt5.mp4"
+      },
+      {
+        "id": "test/dia96_utt0",
+        "expected": 1.8419999999999845,
+        "original": 2.688,
+        "alternate": 1.82,
+        "file": "final_videos_testdia96_utt0.mp4"
+      },
+      {
+        "id": "test/dia96_utt5",
+        "expected": 2.0019999999999527,
+        "original": 2.0906875,
+        "alternate": 1.97,
+        "file": "final_videos_testdia96_utt5.mp4"
+      },
+      {
+        "id": "test/dia97_utt4",
+        "expected": 1.5519999999999072,
+        "original": 2.752,
+        "alternate": 1.53,
+        "file": "final_videos_testdia97_utt4.mp4"
+      },
+      {
+        "id": "test/dia97_utt8",
+        "expected": 0.5520000000001346,
+        "original": 3.52,
+        "alternate": 0.53,
+        "file": "final_videos_testdia97_utt8.mp4"
+      },
+      {
+        "id": "test/dia98_utt3",
+        "expected": 1.3119999999999976,
+        "original": 2.304,
+        "alternate": 1.29,
+        "file": "final_videos_testdia98_utt3.mp4"
+      },
+      {
+        "id": "test/dia98_utt6",
+        "expected": 1.460000000000008,
+        "original": 3.392,
+        "alternate": 1.43,
+        "file": "final_videos_testdia98_utt6.mp4"
+      },
+      {
+        "id": "test/dia98_utt8",
+        "expected": 1.2519999999999953,
+        "original": 1.8773125,
+        "alternate": 1.23,
+        "file": "final_videos_testdia98_utt8.mp4"
+      },
+      {
+        "id": "test/dia9_utt3",
+        "expected": 0.7930000000000064,
+        "original": 1.0026875,
+        "alternate": 0.76,
+        "file": "final_videos_testdia9_utt3.mp4"
+      }
+    ]
+  },
+  "signal_audit": {
+    "train": {
+      "zero_signal": [],
+      "rms_below_1e-5": []
+    },
+    "dev": {
+      "zero_signal": [],
+      "rms_below_1e-5": []
+    },
+    "test": {
+      "zero_signal": [],
+      "rms_below_1e-5": []
+    }
+  },
+  "policies": {
+    "audio_limit_seconds": 30,
+    "missing_audio": "retain annotation; text-only fallback; exclude from audio and fusion fitting",
+    "overlength_audio": "retain source and annotation; text-only fallback; exclude from audio and fusion fitting",
+    "test_precedence": "prefer final_videos_testdiaN_uttM.mp4 when supplied by official archive",
+    "transcripts_in_report": false
+  }
+}
