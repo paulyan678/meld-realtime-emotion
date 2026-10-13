@@ -42,7 +42,7 @@ These scores use the same 2,608 MELD test clips with usable audio. They use the 
 
 The gain over text alone is small. See the [saved evaluation](reports/test_metrics.json).
 
-- **Software checks:** 154 Python tests and 7 browser-interface tests passed in [CI](https://github.com/paulyan678/meld-realtime-emotion-clean/actions/runs/38481695202).
+- **Software checks:** 154 Python tests and 7 browser-interface tests passed in [CI](https://github.com/paulyan678/meld-realtime-emotion/actions/runs/38481695202).
 - **Automatic speech check:** 93 of 100 clips completed. Seven returned no recognized speech. On the local CPU, the median reply time was 75 ms. The 95th percentile was 208 ms. These times start after recording ends and cover successful requests only. See the [saved speech check](reports/speech_interaction.json).
 
 ## Real example
