@@ -152,9 +152,15 @@ test("automatic retries and fresh input never reuse previous transcript text", a
 
 test("microphone auto path streams PCM without text and retains WAV for correction", async () => {
   const ui = browser();
+  ui.upload();
+  await ui.click("analyze");
+  assert.equal(ui.elements.result.hidden, false);
   ui.elements.transcript.value = "Stale previous result";
   await ui.click("record");
   const ws = ui.sockets[0];
+  assert.equal(ui.elements.result.hidden, true);
+  assert.equal(ui.elements.emotion.textContent, "");
+  assert.equal(ui.elements.latency.textContent, "—");
   assert.equal(ui.elements.transcript.value, "");
   assert.equal(ui.elements.stop.disabled, false);
   assert.equal(ui.elements.analyze.disabled, true);
@@ -172,7 +178,7 @@ test("microphone auto path streams PCM without text and retains WAV for correcti
   ui.click("edit-transcript");
   ui.elements.transcript.value = "Actual spoken words";
   await ui.click("analyze");
-  const form = ui.requests[0].body;
+  const form = ui.requests[1].body;
   assert.equal(form.get("text"), "Actual spoken words");
   const wav = Buffer.from(await form.get("audio").arrayBuffer());
   assert.equal(wav.toString("ascii", 0, 4), "RIFF");
@@ -184,19 +190,98 @@ test("microphone auto path streams PCM without text and retains WAV for correcti
 
 test("pending HTTP request blocks duplicate input, and failure permits retry", async () => {
   const response = deferred();
-  const ui = browser({ predict: () => response.promise });
+  let count = 0;
+  const ui = browser({ predict: () => ++count === 1
+    ? { ok: true, json: async () => prediction() }
+    : response.promise });
   ui.upload();
+  await ui.click("analyze");
+  assert.equal(ui.elements.result.hidden, false);
   const pending = ui.click("analyze");
+  assert.equal(ui.elements.result.hidden, true);
+  assert.equal(ui.elements.response.textContent, "");
+  assert.equal(ui.elements.scores.children.length, 0);
+  assert.equal(ui.elements.latency.textContent, "—");
   assert.equal(ui.elements.record.disabled, true);
   assert.equal(ui.elements["mode-manual"].disabled, true);
   await ui.click("analyze");
-  assert.equal(ui.requests.length, 1);
+  assert.equal(ui.requests.length, 2);
   response.resolve({ ok: false, json: async () => ({ detail: "No speech recognized" }) });
   await pending;
   assert.equal(ui.elements.message.textContent, "No speech recognized");
   assert.equal(ui.elements.analyze.disabled, false);
   assert.equal(ui.elements.record.disabled, false);
   assert.equal(ui.elements["mode-manual"].disabled, false);
+});
+
+test("new audio clears the old result through failure and a corrected retry", async () => {
+  const failure = deferred();
+  const retry = deferred();
+  let count = 0;
+  const ui = browser({ predict: () => {
+    count += 1;
+    if (count === 1) return { ok: true, json: async () => prediction() };
+    return count === 2 ? failure.promise : retry.promise;
+  } });
+  const assertNoResult = () => {
+    assert.equal(ui.elements.result.hidden, true);
+    for (const id of ["emotion", "confidence", "response"]) assert.equal(ui.elements[id].textContent, "");
+    for (const id of ["latency", "transcription-latency", "modalities"]) assert.equal(ui.elements[id].textContent, "—");
+    assert.equal(ui.elements.scores.children.length, 0);
+  };
+  ui.upload();
+  await ui.click("analyze");
+  assert.equal(ui.elements.result.hidden, false);
+  assert.equal(ui.elements.emotion.textContent, "joy");
+  assert.equal(ui.elements.response.textContent, "Hello");
+  assert.equal(ui.elements.scores.children.length, 2);
+
+  const newAudio = new File(["audio needing a manual transcript"], "next.wav");
+  ui.upload(newAudio);
+  assertNoResult();
+  assert.equal(ui.elements["result-state"].textContent, "Awaiting input");
+  const pending = ui.click("analyze");
+  assertNoResult();
+  failure.resolve({ ok: false, json: async () => ({ detail: "No speech recognized" }) });
+  await pending;
+  assertNoResult();
+  assert.equal(ui.elements["result-state"].textContent, "Needs attention");
+  assert.equal(ui.elements.analyze.disabled, false);
+
+  ui.mode("mode-manual");
+  ui.elements.transcript.value = "I feel sad today";
+  const retried = ui.click("analyze");
+  assertNoResult();
+  assert.equal(ui.elements.transcript.value, "I feel sad today");
+  assert.equal(ui.requests[2].body.get("text"), "I feel sad today");
+  assert.equal(await ui.requests[2].body.get("audio").text(), await newAudio.text());
+  retry.resolve({ ok: true, json: async () => ({
+    ...prediction("provided"), transcript: "I feel sad today", emotion: "sadness",
+    confidence: 0.7, probabilities: { sadness: 0.7, neutral: 0.3 }, response: "That sounds difficult.",
+  }) });
+  await retried;
+  assert.equal(ui.elements.result.hidden, false);
+  assert.equal(ui.elements.emotion.textContent, "sadness");
+  assert.equal(ui.elements.confidence.textContent, "70%");
+  assert.equal(ui.elements.response.textContent, "That sounds difficult.");
+  assert.equal(ui.elements["result-state"].textContent, "Analysis complete");
+});
+
+test("invalid file selection cannot display or reanalyze the previous recording", async () => {
+  const ui = browser();
+  ui.upload();
+  await ui.click("analyze");
+  assert.equal(ui.elements.result.hidden, false);
+  ui.upload(new File(["not audio"], "notes.txt"));
+  assert.equal(ui.elements.result.hidden, true);
+  assert.equal(ui.elements.emotion.textContent, "");
+  assert.equal(ui.elements.response.textContent, "");
+  assert.equal(ui.elements.scores.children.length, 0);
+  assert.equal(ui.elements.analyze.disabled, true);
+  assert.equal(ui.elements.message.textContent, "Choose a .wav recording.");
+  await ui.click("analyze");
+  assert.equal(ui.requests.length, 1);
+  assert.equal(ui.elements.message.textContent, "Choose a WAV or record your voice first.");
 });
 
 test("microphone permission failure restores usable controls", async () => {

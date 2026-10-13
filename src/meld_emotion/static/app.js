@@ -56,7 +56,17 @@ function controls(isBusy) {
   $("stop").disabled = !recording;
 }
 
+function invalidateResult() {
+  $("result").hidden = true;
+  $("empty-result").hidden = false;
+  for (const id of ["emotion", "confidence", "response"]) $(id).textContent = "";
+  for (const id of ["latency", "transcription-latency", "modalities"]) $(id).textContent = "—";
+  $("scores").replaceChildren();
+  $("result-state").textContent = "Awaiting input";
+}
+
 function fail(error) {
+  invalidateResult();
   const text = error instanceof Error ? error.message : String(error);
   message(text, true);
   log(text, true);
@@ -65,14 +75,19 @@ function fail(error) {
 }
 
 for (const mode of ["mode-auto", "mode-manual"]) $(mode).addEventListener("change", () => {
+  invalidateResult();
   updateTranscriptMode();
   message(automaticTranscript() ? "The next analysis will transcribe the audio again. Previous text will not be reused." : "Enter or correct the transcript, then analyze your audio.");
 });
 $("edit-transcript").addEventListener("click", () => {
+  invalidateResult();
   $("mode-manual").checked = true;
   updateTranscriptMode();
   $("transcript").focus();
   message("Correct the words, then click Analyze audio to reuse this recording.");
+});
+$("transcript").addEventListener("input", () => {
+  if (!busy) invalidateResult();
 });
 
 async function health() {
@@ -97,12 +112,15 @@ function clearAutomaticTranscript() {
 
 function selectFile(selected) {
   if (busy || !selected) return;
+  invalidateResult();
+  file = null;
+  clearAutomaticTranscript();
+  $("audio-info").textContent = "No WAV selected.";
+  $("record-clock").textContent = "00:00";
   if (selected.size > 8 * 1024 * 1024) return fail(new Error("Choose a WAV file smaller than 8 MiB."));
   if (!selected.name.toLowerCase().endsWith(".wav")) return fail(new Error("Choose a .wav recording."));
   file = selected;
-  clearAutomaticTranscript();
   $("audio-info").textContent = `${(file.size / 1024).toFixed(0)} KiB · WAV recording`;
-  $("record-clock").textContent = "00:00";
   controls(false);
   message(automaticTranscript() ? "Recording selected. Click Analyze audio to transcribe it and predict an emotion." : "Recording selected. Check its transcript, then analyze.");
   log(`WAV selected: ${file.name}`);
@@ -176,6 +194,7 @@ function displayResult(result) {
 
 $("analyze").addEventListener("click", async () => {
   if (busy) return;
+  invalidateResult();
   const automatic = automaticTranscript();
   const transcript = automatic ? "" : $("transcript").value.trim();
   if (!file) return fail(new Error("Choose a WAV or record your voice first."));
@@ -304,6 +323,7 @@ async function finishRecording() {
 
 $("record").addEventListener("click", async () => {
   if (busy) return;
+  invalidateResult();
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return fail(new Error("Microphone access requires localhost or HTTPS. You can also upload a WAV."));
   controls(true);
   message("Requesting microphone access…");

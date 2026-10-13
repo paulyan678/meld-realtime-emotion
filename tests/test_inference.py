@@ -12,7 +12,7 @@ from meld_emotion.encoders import prepare_audio
 
 
 class FakeEncoders:
-    parameter_counts = {"text_encoder": 23, "audio_encoder": 41}
+    parameter_counts = {"text_encoder": 23, "audio_encoder": 41, "asr_ctc_head": 5}
 
     def __init__(self, device="cpu", local_files_only=True):
         self.device = device
@@ -322,9 +322,10 @@ def test_all_loaded_model_and_head_values_are_counted(engine):
     assert engine.parameter_counts == {
         "text_encoder": 23,
         "audio_encoder": 41,
+        "asr_ctc_head": 5,
         "heads_normalization_calibration": head_values,
         "response_policy": 0,
-        "total": 23 + 41 + head_values,
+        "total": 23 + 41 + 5 + head_values,
     }
     assert engine.encoders.local_files_only is True
 
@@ -334,6 +335,23 @@ def test_cap_includes_head_parameters_not_only_backbones(monkeypatch, model_dir)
         parameter_counts = {"text_encoder": 3_000_000_000, "audio_encoder": 3_000_000_000}
 
     monkeypatch.setattr(inference, "Encoders", OversizedEncoders)
+    with pytest.raises(ValueError, match="6B"):
+        inference.EmotionEngine(model_dir)
+
+
+def test_transcription_head_can_push_complete_path_over_parameter_limit(monkeypatch, model_dir):
+    head_values = sum(array.size for array in inference.Heads(model_dir).weights.values())
+
+    class AtLimitEncoders(FakeEncoders):
+        parameter_counts = {
+            "text_encoder": 3_000_000_000,
+            "audio_encoder": 3_000_000_000 - head_values,
+            "asr_ctc_head": 0,
+        }
+
+    monkeypatch.setattr(inference, "Encoders", AtLimitEncoders)
+    assert inference.EmotionEngine(model_dir).parameter_counts["total"] == 6_000_000_000
+    monkeypatch.setitem(AtLimitEncoders.parameter_counts, "asr_ctc_head", 1)
     with pytest.raises(ValueError, match="6B"):
         inference.EmotionEngine(model_dir)
 
