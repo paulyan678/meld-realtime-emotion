@@ -1,10 +1,10 @@
 # Speech emotion demo
 
-I built this app to predict emotion from **text and audio** in English speech. My app predicts one MELD emotion and gives a short reply that quotes the input. I can let it transcribe a recording or provide a transcript myself. I run inference locally after a one-time model download.
+This is my local speech emotion demo. It uses **text and audio** from English speech to predict one MELD emotion and give a short reply that quotes the input. You can let the app transcribe a recording or provide a transcript yourself. After a one-time model download, inference runs locally.
 
-## How I run it
+## Getting started
 
-I use Python 3.12. I clone this repository, open its folder, and run these commands. I include the trained emotion classifiers in the repository and download the pretrained encoders once.
+Start with Python 3.12, clone this repository, and open its folder. I've included the trained emotion classifiers; the setup below downloads the pretrained encoders once:
 
 ```bash
 python3.12 -m venv .venv
@@ -16,23 +16,23 @@ export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 meld-emotion serve
 ```
 
-I open [the app](http://127.0.0.1:8000) and allow microphone access. I click **Record microphone**, speak for 0.1 to 30 seconds, then click **Stop & analyze**. I can also upload a WAV file of up to 8 MiB, with one or two channels and a sample rate from 8 to 48 kHz.
+Open [the app](http://127.0.0.1:8000) and allow microphone access. Click **Record microphone**, speak for 0.1 to 30 seconds, then click **Stop & analyze**. You can also upload a WAV file of up to 8 MiB, with one or two channels and a sample rate from 8 to 48 kHz.
 
-I use **Edit transcript** to fix any words. My model's predictions can be wrong, and it relies more on words than tone.
+Use **Edit transcript** to correct any words before interpreting the result. Keep in mind that predictions can be wrong, and the model relies more on words than tone.
 
-## How I built the model
+## How the model works
 
-1. **Speech to text:** I use wav2vec 2.0 to transcribe my recording, or I supply the words myself.
-2. **Text features:** I use MiniLM to turn the words into 384 numbers.
-3. **Audio features:** I use wav2vec 2.0 to turn the voice into 1,536 numbers describing the average and variation of its audio features.
-4. **Emotion:** I use small logistic regression classifiers with the text, audio, or their joined features. I give equal weight to the text-only and combined probabilities in the final result. I selected this weight on the development split.
-5. **Reply:** I use a fixed sentence template that incorporates the predicted emotion and quotes the input. When confidence is low, I have the app ask a follow-up question.
+1. **Speech to text:** wav2vec 2.0 transcribes your recording, or you can supply a transcript yourself.
+2. **Text features:** MiniLM turns the words into 384 numbers.
+3. **Audio features:** wav2vec 2.0 turns the voice into 1,536 numbers describing the average and variation of its audio features.
+4. **Emotion:** small logistic regression classifiers use the text, audio, or their joined features. The final result gives equal weight to the text-only and combined probabilities, a weight selected on the development split.
+5. **Reply:** a fixed sentence template incorporates the predicted emotion and quotes your input. Low confidence leads to a follow-up question.
 
-I predict one of seven labels: neutral, surprise, fear, sadness, joy, disgust, and anger. My API returns the label, confidence, all seven probabilities, the reply, and the input status in JSON. I use a text-only fallback for silent audio when a transcript is supplied. Automatic transcription in my app can fail when no speech is recognized.
+The seven labels are neutral, surprise, fear, sadness, joy, disgust, and anger. If you're using the API, you'll receive the label, confidence, all seven probabilities, the reply, and the input status in JSON. Silent audio falls back to text when a transcript is supplied. Automatic transcription can fail when no speech is recognized.
 
-I keep the two pretrained encoders fixed and fit only the small classifiers, feature scaling, and calibration on MELD. This keeps my training small and makes each stage easy to inspect. I combine text and audio so tone can affect the result, and I include an extra text prediction to limit the effect of a weak audio classifier. I use a fixed reply template for speed and predictability, though its replies are less flexible than generated conversation.
+I keep the two pretrained encoders fixed and fit only the small classifiers, feature scaling, and calibration on MELD. That keeps training small and makes each stage easy to inspect. Combining text and audio lets tone affect the result, while the extra text prediction limits the effect of a weak audio classifier. For replies, I use a fixed template for speed and predictability, at the cost of less flexible conversation.
 
-I use the following conservative parameter count for my complete local model. I include all three classifiers, their scaling and calibration values, and the speech output head, which shares the audio encoder.
+For a conservative count of the complete local model, I include all three classifiers, their scaling and calibration values, and the speech output head. The speech output head shares the audio encoder:
 
 | Component | Parameters or stored model values |
 |---|---:|
@@ -43,17 +43,17 @@ I use the following conservative parameter count for my complete local model. I 
 | Reply templates | 0 |
 | **Total** | **117,143,353** |
 
-My model stays below the 6 billion parameter limit, and I do not use a remote model API. I have not implemented vision, speech synthesis, or reinforcement learning. I consider these optional extensions to my text-and-audio prototype.
+This stays below the 6 billion parameter limit and requires no remote model API. Vision, speech synthesis, and reinforcement learning are optional extensions that I haven't implemented in this text-and-audio prototype.
 
 ## What I mean by real time
 
-I send audio chunks from the app while recording, then transcribe and predict after recording stops. I process each utterance independently; my app does not produce partial emotion labels or remember earlier turns.
+As you record, the app sends audio chunks to the server. Transcription and prediction happen after you stop. Each utterance is independent; the app doesn't produce partial emotion labels or remember earlier turns.
 
-I target a **warm 95th-percentile reply time of at most 500 ms after the end of an utterance** locally. I treat this as a project target, not a guarantee on every computer. I assume one user, models already loaded, and English audio of 0.1 to 30 seconds, and I measure cold model loading separately. I run one inference request at a time on the server. I return a busy error for another request so it can be retried, and I set fixed limits on audio, message sizes, and idle connections.
+My local target is a **warm 95th-percentile reply time of at most 500 ms after the end of an utterance**. Treat this as a project target, not a guarantee on every computer. It assumes one user, models already loaded, and English audio of 0.1 to 30 seconds. Cold model loading is measured separately. The server handles one inference request at a time, so retry if another request receives a busy error. Audio, message sizes, and idle connections have fixed limits.
 
-## My test results
+## Test results and limitations
 
-I evaluated all three inputs on the same 2,608 MELD test clips with usable audio, using the dataset's reference transcripts. I did not measure automatic transcription accuracy in these scores. I report macro F1 to give each emotion equal weight.
+To compare the three inputs, I evaluated them on the same 2,608 MELD test clips with usable audio and the dataset's reference transcripts. These scores don't measure automatic transcription accuracy. Macro F1 gives each emotion equal weight.
 
 | Input | Accuracy | Macro F1 |
 |---|---:|---:|
@@ -61,30 +61,30 @@ I evaluated all three inputs on the same 2,608 MELD test clips with usable audio
 | Audio only | 45.51% | 22.23% |
 | Text and audio | 48.77% | 37.85% |
 
-I found only a small gain over text alone. In my full 2,610-clip test replay, I used text fallback for two clips because their audio was too long. I measured a macro F1 gain of 0.31 percentage points. My paired bootstrap over dialogues gave a 95% interval from -0.77 to +1.32 points. Because that interval includes zero, I cannot conclude that this test establishes a reliable improvement. I saved the results in the [evaluation report](reports/test_metrics.json).
+The gain over text alone is small. In the full 2,610-clip test replay, two clips use text fallback because their audio is too long. The macro F1 gain is 0.31 percentage points, with a 95% interval from -0.77 to +1.32 points in a paired bootstrap over dialogues. Since that interval includes zero, I wouldn't interpret this test as establishing a reliable improvement. You can inspect the [evaluation report](reports/test_metrics.json) for the saved results.
 
-- **Software checks:** I ran 161 Python tests and 9 JavaScript interface tests locally on October 13, 2026, and all passed. My lint and formatting checks also passed. I use browser adapters in Node for the JavaScript tests. I also track [CI runs](https://github.com/paulyan678/meld-realtime-emotion/actions/workflows/ci.yml).
-- **Real browser checks:** I verified WAV upload, transcript correction, physical microphone capture, invalid-file handling, and retry in Chrome. During these checks, I found and fixed a stale-result display after new input or failure. My microphone testing verified capture and processing, not word accuracy. I recorded the results in the [browser check](reports/browser_smoke.json).
-- **Automatic speech over HTTP and WebSocket:** I completed 93 of 100 clips; seven returned no recognized speech. I measured a median reply time of **74 ms** and a p95 of **201 ms**. My first HTTP request with model loading took **2,090 ms**. I measured warm times for successful requests only, from the client's end event to the complete response on localhost. I met my 500 ms p95 target on this sample and saved the results in the [current speech check](reports/speech_interaction_current.json).
-- **Complete offline speech resource check:** I ran CPU inference on an **Apple M4 Max, 48 GiB RAM, 16 logical CPU cores, and four Torch threads**, completing 93 of 100 clips; seven returned no recognized speech. I measured a median time of **73 ms** and a p95 of **204 ms**. I sampled peak process memory every 10 ms and recorded **1.13 GiB**. I did not use a GPU. My first prediction with fresh model loading took **2,109 ms**. I timed WAV decoding, transcription, emotion, and reply generation, excluding recording and transport. I had already read the checkpoint files for hashing. I used macOS 27.0.1 and Python 3.12.13, and saved the results in the [full resource report](reports/runtime_speech_cpu.json).
+- **Software checks:** All 161 Python tests and 9 JavaScript interface tests passed locally on October 13, 2026, along with lint and formatting checks. The JavaScript tests use browser adapters in Node. See the [CI runs](https://github.com/paulyan678/meld-realtime-emotion/actions/workflows/ci.yml).
+- **Real browser checks:** Chrome passed WAV upload, transcript correction, physical microphone capture, invalid-file handling, and retry. These checks also caught a stale-result display after new input or failure, which is now fixed. Microphone testing verified capture and processing, not word accuracy. See the [browser check](reports/browser_smoke.json).
+- **Automatic speech over HTTP and WebSocket:** 93 of 100 clips completed; seven returned no recognized speech. Median reply time was **74 ms** and p95 was **201 ms**. The first HTTP request with model loading took **2,090 ms**. Warm times cover successful requests only, from the client's end event to the complete response on localhost. This sample met the 500 ms p95 target. See the [current speech check](reports/speech_interaction_current.json).
+- **Complete offline speech resource check:** CPU inference completed 93 of 100 clips on an **Apple M4 Max, 48 GiB RAM, 16 logical CPU cores, and four Torch threads**; seven returned no recognized speech. Median time was **73 ms** and p95 was **204 ms**. Peak process memory, sampled every 10 ms, was **1.13 GiB**, with no GPU used. The first prediction with fresh model loading took **2,109 ms**. This timer includes WAV decoding, transcription, emotion, and reply generation, but excludes recording and transport. Checkpoint files had already been read for hashing. The run used macOS 27.0.1 and Python 3.12.13. See the [full resource report](reports/runtime_speech_cpu.json).
 
-I used supplied transcripts in my older [CPU benchmark](reports/runtime_cpu.json) and [MPS benchmark](reports/runtime_mps.json). I did not include the later speech recognition head in their memory and parameter totals, so I keep these as historical measurements rather than current full speech resource results.
+When comparing benchmarks, note that my older [CPU benchmark](reports/runtime_cpu.json) and [MPS benchmark](reports/runtime_mps.json) use supplied transcripts. Their memory and parameter totals exclude the later speech recognition head, so treat them as historical measurements rather than current full speech resource results.
 
-I tested on TV dialogue from MELD, so my results can change with new speakers, background noise, accents, and different recording devices. I do not treat a recognized transcript as proof that the words are correct, or a high emotion score as proof of a person's actual feelings. I have not yet measured automatic transcription word error rate or downstream emotion accuracy with automatic transcripts.
+These tests use TV dialogue from MELD. Your results may differ with new speakers, background noise, accents, and different recording devices. A recognized transcript doesn't prove that the words are correct, and a high emotion score doesn't prove a person's actual feelings. I haven't yet measured automatic transcription word error rate or downstream emotion accuracy with automatic transcripts.
 
-## An example from my app
+## Try an example
 
-In this [recorded run](reports/interaction.json), I used the 2.79-second MELD clip `dev/dia0_utt0` and supplied both the audio and this transcript:
+Here's a [recorded run](reports/interaction.json) you can reproduce with the 2.79-second MELD clip `dev/dia0_utt0`. It uses both the audio and this supplied transcript:
 
 > Oh my God, he’s lost it. He’s totally lost it.
 
-My model returned **sadness** with **49.6% confidence**, matching the dataset's sadness label. My app gave this reply:
+The model returned **sadness** with **49.6% confidence**, matching the dataset's sadness label, and gave this reply:
 
 > About “Oh my God, he’s lost it. He’s totally lost it.”: That sounds difficult. Would you like to talk about it?
 
-My text classifier predicted sadness, while my audio classifier predicted joy. I used both in the final result. I supplied a transcript for this example; automatic transcription can produce different words and results.
+The text classifier predicted sadness, while the audio classifier predicted joy; the final result used both. Keep in mind that this example uses a supplied transcript. Automatic transcription can produce different words and results.
 
-To reproduce this example, I install FFmpeg and curl first. My data script downloads the full MELD archive even when I request only the development split. The archive is about **10.9 GB**, so I allow about **35 GB of free disk space** for full preparation, including archives and extracted files, separately from the encoder cache.
+To try it yourself, install FFmpeg and curl first. The data script downloads the full MELD archive even when you request only the development split. The archive is about **10.9 GB**, so allow about **35 GB of free disk space** for full preparation, including archives and extracted files, in addition to the encoder cache.
 
 ```bash
 python scripts/prepare_data.py --data-dir data/meld --splits dev --allow-missing
@@ -93,7 +93,7 @@ meld-emotion predict \
   --text "Oh my God, he’s lost it. He’s totally lost it."
 ```
 
-I get JSON output from this command. I expect its main fields to match my saved result below, apart from small numeric differences across devices:
+The command prints JSON. Its main fields should match the saved result below, apart from small numeric differences across devices:
 
 ```json
 {
@@ -106,12 +106,12 @@ I get JSON output from this command. I expect its main fields to match my saved 
 }
 ```
 
-I also include seven emotion probabilities and runtime details in the full output. To try speech recognition, I upload the same WAV in the app and leave **Automatic** selected. In my saved automatic run, the app recognized different words: `I GHOT HE'S LOST THAT HE SOLLY LOST HIM`. My model still predicted sadness, with 57.6% confidence. This is why I include a transcript correction step. I saved that run in the [automatic example](reports/speech_interaction.json).
+The full output also includes seven emotion probabilities and runtime details. To try speech recognition, upload the same WAV in the app and leave **Automatic** selected. In the [automatic example](reports/speech_interaction.json), the app recognized different words: `I GHOT HE'S LOST THAT HE SOLLY LOST HIM`. It still predicted sadness, with 57.6% confidence. This is why I include a transcript correction step.
 
 <details>
-<summary>How I reproduce training, evaluation, and software checks</summary>
+<summary>Reproduce training, evaluation, and software checks</summary>
 
-I run these commands from the repository folder in the same activated environment, keeping the `HF_HOME` and offline exports from my setup commands. I still need a network connection for data preparation, which downloads pinned data files and records their hashes. I use `--allow-missing` to keep explicitly failed audio rows in the audit instead of treating them as valid audio.
+Run the following commands from the repository folder in the same activated environment, keeping the `HF_HOME` and offline exports from setup. You'll still need a network connection for data preparation, which downloads pinned data files and records their hashes. The `--allow-missing` flag keeps explicitly failed audio rows in the audit instead of treating them as valid audio.
 
 ```bash
 python -m pip install -e '.[dev]'
@@ -134,9 +134,9 @@ pytest -q
 node --test tests/test_ui.cjs
 ```
 
-My interface tests require Node.js 20 or later. I train on the official training split, select and calibrate my model on the development split, and report final scores on the test split. I write generated files to `work/repro` and keep the supplied model intact. I inspect `data/meld/data_summary.json` for excluded or missing audio.
+The interface tests require Node.js 20 or later. Training uses the official training split, model selection and calibration use the development split, and final scores use the test split. Generated files go into `work/repro`, leaving the supplied model intact. Check `data/meld/data_summary.json` for excluded or missing audio.
 
-To repeat my real HTTP and WebSocket check, I start `meld-emotion serve`. Then I run these commands in a second terminal with the same environment:
+To repeat the HTTP and WebSocket check, start `meld-emotion serve`, then run these commands in a second terminal with the same environment:
 
 ```bash
 mkdir -p work/repro
@@ -145,7 +145,7 @@ python scripts/check_interaction.py \
   --automatic --output work/repro/speech_interaction.json
 ```
 
-To measure my full local model without a server, I run:
+To measure the full local model without a server, run:
 
 ```bash
 python scripts/benchmark.py \
@@ -153,18 +153,18 @@ python scripts/benchmark.py \
   --device cpu --automatic --output work/repro/runtime_speech_cpu.json
 ```
 
-In this benchmark, I block Python socket connections and use only cached models. I record code and model hashes, hardware, all failed attempts, and sampled peak process memory. My warm timer covers WAV decoding, transcription, emotion, and reply generation, excluding recording and transport. My cold timer includes fresh model initialization. I have already read the checkpoint files for hashing, so I do not treat this as a cold-disk measurement.
+This benchmark blocks Python socket connections and uses only cached models. It records code and model hashes, hardware, all failed attempts, and sampled peak process memory. The warm timer covers WAV decoding, transcription, emotion, and reply generation, excluding recording and transport. The cold timer includes fresh model initialization. Since checkpoint files have already been read for hashing, this isn't a cold-disk measurement.
 
-In my HTTP and WebSocket check, I send successive audio chunks and check the final emotion and reply. I measure the local server path without exercising microphone permission or a physical recording device.
+The HTTP and WebSocket check sends successive audio chunks and checks the final emotion and reply. Use it to measure the local server path; it doesn't exercise microphone permission or a physical recording device.
 
 </details>
 
 ## Credits
 
-I use the [MELD dataset](https://github.com/declare-lab/MELD) by Poria et al. (2019),
+This project uses the [MELD dataset](https://github.com/declare-lab/MELD) by Poria et al. (2019),
 [MiniLM](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2), and
 [wav2vec 2.0](https://huggingface.co/facebook/wav2vec2-base-960h).
-My use of each external component is subject to its upstream license. I download
-dataset media and pretrained encoder weights separately.
+Upstream licenses apply to each external component. Dataset media and pretrained
+encoder weights are downloaded separately.
 
-I also use PyTorch, Transformers, scikit-learn, NumPy, SciPy, SoundFile, FastAPI, and the other dependencies listed in `pyproject.toml`. I used Codex to assist with implementation, review, testing, and documentation.
+The implementation uses PyTorch, Transformers, scikit-learn, NumPy, SciPy, SoundFile, FastAPI, and the other dependencies listed in `pyproject.toml`. I used Codex to assist with implementation, review, testing, and documentation.
